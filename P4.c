@@ -1,3 +1,4 @@
+Mayranna Laizco Araújo Silva 11711EEL011
 #include <stdio.h>
 
 int potencia(int num)
@@ -39,4 +40,4 @@ int main()
 	}
 	printf("\nNumero inteiro: %d\n\n", numero_int);
 }
-\\ Mayranna Laizco Araújo Silva 11711EEL011
+
