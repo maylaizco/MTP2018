@@ -39,3 +39,4 @@ int main()
 	}
 	printf("\nNumero inteiro: %d\n\n", numero_int);
 }
+\\ Mayranna Laizco Araújo Silva 11711EEL011
