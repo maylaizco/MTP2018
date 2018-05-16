@@ -1,4 +1,4 @@
-Mayranna Laizco Araújo Silva 11711EEL011
+//Mayranna Laizco Araújo Silva 11711EEL011
 #include <stdio.h>
 
 int potencia(int num)
