@@ -1,3 +1,4 @@
+//Mayranna Laizco Ara√∫jo Silva 11711EEL011
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -139,7 +140,7 @@ void salvarArq(Produto *p, int cont)
 		printf("Produtos armazenados em disco com sucesso!\n\n");
 		fclose(arq);
 	}else
-		printf("Erro: n„o foi possÌvel abrir o arquivo\n\n");
+		printf("Erro: n√£o foi poss√≠vel abrir o arquivo\n\n");
 }
 
 int main()
