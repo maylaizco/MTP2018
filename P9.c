@@ -1,113 +1,65 @@
 //Mayranna Laizco Araújo Silva 11711EEL011
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
 
-typedef struct Dimensao{
-    float largura;
-    float altura;
-    float profundidade;
-}
-Dimensao;
+struct Dimensoes{
+	float largura, profundidade, altura;
+};
 
-typedef struct Produto{
-    char nomePro[64];
-    float preco;
-    Dimensao dimensao;
-}Produto;
+struct Produto{
+	char nome[64];
+	float preco;
+	struct Dimensoes dimensoes;
+};
 
-void cadastra(Produto * p){
-
-    printf("\nDigite o nome do produto: ");
-    fgets(p->nomePro, 64, stdin);
-    p->nomePro[strlen(p->nomePro)-1] = '\0';
-
-    printf("\nDigite o preco: ");
-    scanf("%f", &(p->preco));
-    getchar();
-
-    printf("\nDigite a largura: ");
-    scanf("%f", &(p->dimensao.largura));
-    getchar();
-
-    printf("\nDigite a profundidade: ");
-    scanf("%f", &(p->dimensao.profundidade));
-    getchar();
-
-    printf("\nDigite a altura: ");
-    scanf("%f", &(p->dimensao.altura));
+void cadastrar(struct Produto Quant[], int i)
+{
+	printf("Nome: ");
+	scanf("%s", Quant[i].nome);getchar();
+	printf("Preco: ");
+	scanf("%f", &Quant[i].preco);getchar();
+	printf("Largura: ");
+	scanf("%f", &Quant[i].dimensoes.largura);getchar();
+	printf("Profundidade: ");
+	scanf("%f", &Quant[i].dimensoes.profundidade);getchar();
+	printf("Altura: ");
+	scanf("%f", &Quant[i].dimensoes.altura);getchar();
+	printf("Produto %d cadastrado com sucesso!\n", i+1);
 }
 
-void consulta(Produto * p){
-    char c;
+void consultar(struct Produto Quant[], int i)
+{
+	
+	if (strcmp (Quant[i].nome, "") != 0 && (i==0||i==1))
+		printf("%s, R$ %.2f, L: %.2fm x P: %.2fm x A: %.2fm\n", Quant[i].nome, Quant[i].preco, +
+			+ Quant[i].dimensoes.largura, Quant[i].dimensoes.profundidade, Quant[i].dimensoes.altura);
+	else
+		printf("Produto nao cadastrado!\n");
 
-    if(strlen(p->nomePro) == 0){
-        printf("\nProduto nao cadastrado!\n");
-        while((c=getchar()) != '\n');
-        return;
-    }
-
-    printf("\n%s, R$ %.2f, Height: %.2fm x Length: %.2fm x Width: %.2fm\n",
-    p->nomePro, p->preco,(p->dimensao.largura),(p->dimensao.profundidade), (p->dimensao.altura));
-    while((c=getchar())!='\n');
 }
 
-int main(){
-    int flag=0, flag2;
-    Produto * produtos = calloc(2, sizeof(Produto));
-    char str[2][16] = {"Cadastro", "Consulta"};
+int main ()
+{
+	struct Produto Quant[2];
+	strcpy(Quant[0].nome, "");
+	strcpy(Quant[1].nome, "");
+	int op, pro;
 
-    do{
-       printf("\n1 - Cadastrar\n2 - Consulta\n3 - Sair\n-- ");
-        scanf("%d", &flag);
-        getchar();
+	printf("1 - Cadastro\n2 - Consulta\n");
 
-        flag2 = 0;
+	while(scanf("%d", &op)!=EOF)
+	{
+		printf("Numero produto: ");
+		scanf("%d", &pro);getchar();
+		if(op==1)
+			cadastrar(Quant, pro-1);
+		else if(op==2)
+			consultar(Quant, pro-1);
+		else
+			printf("Entrada invalida!\n");
 
-        	if(flag==1){
-        		printf("\nRealizar %s\n", str[flag-1]);
-         		printf("\n1 - Produto 1\n2 - Produto 2\n3 - Voltar\n-- ");
-   	     		scanf("%d", &flag2);
-   	     		getchar();
+	}
 
-   	     		switch(flag2){
-
-                        case 1:
-                            printf("\nProduto %d\n", flag2);
-                            cadastra(&produtos[flag2-1]);
-                          	break;
-
-                        case 2:
-                            printf("\nProduto %d\n", flag2);
-                            cadastra(&produtos[flag2-1]);
-                          	break;
-                    		}
-
-                    	}
-
-			if(flag==2){
-        		printf("\nRealizar %s\n", str[flag-1]);
-         		printf("\n1 - Produto 1\n2 - Produto 2\n3 - Voltar\n-- ");
-   	     		scanf("%d", &flag2);
-   	     		getchar();
-
-   	     		switch(flag2){
-
-                        case 1:
-                            printf("\nProduto %d\n", flag2);
-                            consulta(&produtos[flag2-1]);
-                          	break;
-
-                        case 2:
-                            printf("\nProduto %d\n", flag2);
-                            consulta(&produtos[flag2-1]);
-                          	break;
-                    		}
-
-						}
-	}while(flag!=3);
-
-	free(produtos);
-
-    return 0;
+	return 0;
 }
